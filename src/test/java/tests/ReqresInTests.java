@@ -1,9 +1,11 @@
+package tests;
+
 import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
 
-public class ReqresTests {
+public class ReqresInTests {
 
     @Test
     public void listUsersTest() {
