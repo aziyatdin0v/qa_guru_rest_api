@@ -2,9 +2,7 @@ package tests;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import models.lombok.CreateUserLombokModel;
-import models.lombok.CreateUserResponseLombokModel;
 import models.pojo.CreateUserPojoModel;
-import models.pojo.CreateUserResponsePojoModel;
 import org.junit.jupiter.api.Test;
 
 import static helpers.CustomApiListener.withCustomTemplates;
@@ -22,7 +20,7 @@ public class ReqresInExtendedTests {
         body.setName("Azat");
         body.setJob("student");
 
-        CreateUserResponsePojoModel response = given()
+        CreateUserPojoModel response = given()
                 .filter(new AllureRestAssured()) //with Allure Listener
                 .log().all()
                 .contentType(JSON)
@@ -33,7 +31,7 @@ public class ReqresInExtendedTests {
                 .log().status()
                 .log().body()
                 .statusCode(201)
-                .extract().as(CreateUserResponsePojoModel.class);
+                .extract().as(CreateUserPojoModel.class);
 
         assertThat(response.getName()).isEqualTo("Azat");
         assertThat(response.getJob()).isEqualTo("student");
@@ -45,7 +43,7 @@ public class ReqresInExtendedTests {
         body.setName("Azat");
         body.setJob("student");
 
-        CreateUserResponseLombokModel response = given()
+        CreateUserLombokModel response = given()
                 .filter(withCustomTemplates()) //with Custom Allure Listener
                 .log().all()
                 .contentType(JSON)
@@ -56,7 +54,7 @@ public class ReqresInExtendedTests {
                 .log().status()
                 .log().body()
                 .statusCode(201)
-                .extract().as(CreateUserResponseLombokModel.class);
+                .extract().as(CreateUserLombokModel.class);
 
         assertThat(response.getName()).isEqualTo("Azat");
         assertThat(response.getJob()).isEqualTo("student");
@@ -68,14 +66,14 @@ public class ReqresInExtendedTests {
         body.setName("Azat");
         body.setJob("student");
 
-        CreateUserResponseLombokModel response = given() //given(createUserRequestSpec)
+        CreateUserLombokModel response = given() //given(createUserRequestSpec)
                 .spec(createUserRequestSpec)
                 .body(body)
                 .when()
                 .post()
                 .then()
                 .spec(createUserResponseSpec)
-                .extract().as(CreateUserResponseLombokModel.class);
+                .extract().as(CreateUserLombokModel.class);
 
         assertThat(response.getName()).isEqualTo("Azat");
         assertThat(response.getJob()).isEqualTo("student");

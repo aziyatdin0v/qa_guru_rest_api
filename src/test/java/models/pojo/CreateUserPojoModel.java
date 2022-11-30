@@ -1,5 +1,8 @@
 package models.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateUserPojoModel {
 
     private String name, job;
